@@ -1,6 +1,6 @@
 = vcard2alias
 
-* FIX (url)
+http://github.com/mahnve/vcard2alias/tree/master
 
 == DESCRIPTION:
 
@@ -8,7 +8,7 @@ Reads a list of vCards and extracts emailaddresses into a mutt alias file
 
 == FEATURES/PROBLEMS:
 
-* FIX (list of features or problems)
+* 
 
 == SYNOPSIS:
 
@@ -16,6 +16,7 @@ vcard2alias <infile> > <outputfile>
 
 == REQUIREMENTS:
 
+Vpim
 
 == INSTALL:
 
