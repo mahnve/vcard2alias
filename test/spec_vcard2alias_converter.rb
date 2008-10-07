@@ -20,26 +20,42 @@ FN:Nick Nickman
 NICKNAME:Nickname
 EMAIL;type=INTERNET;type=HOME;type=pref:nick@nick.com
 END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+N:;;;;
+FN:Agile Sweden
+ORG:Agile Sweden;
+EMAIL;type=INTERNET;type=WORK;type=pref:agile@agilesweden.org
+EMAIL;type=INTERNET;type=WORK:agile@list.agilesweden.org
+END:VCARD
     END
 
     converter = Vcard2aliasConverter.new
     @result = converter.convert(addresses)
   end
 
+  it 'should start with alias' do
+    @result.first[0..4].should.equal 'alias' 
+  end
+
   it 'should create nick from first name, last name and type of email address' do
-    @result.first[0..17].should.equal 'user_usersson-work' 
+    @result.first[6..23].should.equal 'user_usersson-work' 
   end
 
   it 'should choose nickname if available' do
-    @result[3][0..12].should.equal 'nickname-home'
+    @result[3][6..18].should.equal 'nickname-home'
   end
 
-  it 'should set up full name' do
-    @result.first[19..31].should.equal 'User Usersson'
+  it 'should set up full name if available' do
+    @result.first[25..37].should.equal 'User Usersson'
   end
 
   it 'should add email address' do
-    @result.first[33..58].should.equal 'musersson@thoughtworks.com'
+    @result.first[39..66].should.equal '<musersson@thoughtworks.com>'
+  end
+
+  it 'should handle organizations' do
+    @result[4].should.equal 'alias agile_sweden-work Agile Sweden <agile@agilesweden.org>'
   end
 
 end

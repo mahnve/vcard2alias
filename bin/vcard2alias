@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+require 'vcard2alias'
+
+File.open(ARGV[0]) do |file|
+  converter = Vcard2aliasConverter.new
+  converter.convert_and_print(file.read)
+end
+

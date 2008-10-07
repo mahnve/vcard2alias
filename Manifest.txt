@@ -4,4 +4,5 @@ README.txt
 Rakefile
 bin/vcard2alias
 lib/vcard2alias.rb
-test/test_vcard2alias.rb
+lib/vcard2alias_converter.rb
+test/spec_vcard2alias_converter.rb

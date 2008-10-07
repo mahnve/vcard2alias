@@ -11,6 +11,6 @@ end
 
 desc "Run all the fast tests"
 task :test do
-  `bacon -Ilib --automatic --quiet`
+  `bacon -Ilib --automatic --quiet test/*.rb`
 end
 

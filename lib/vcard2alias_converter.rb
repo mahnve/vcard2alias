@@ -15,20 +15,26 @@ class Vcard2aliasConverter
     result
   end
 
+  def convert_and_print(input)
+    aliases = convert(input).inject do |result, line|
+      result << "\n" + line
+    end
+    puts aliases
+  end
+
   private
 
   def create_alias_line(nick, location, full_name, email)
-    alias_line = ""
+    alias_line = "alias "
     alias_line << nick
     alias_line << location
-    alias_line << " "
     alias_line << full_name
     alias_line << ' ' 
-    alias_line << email
+    alias_line << '<' + email + '>'
   end
 
   def full_name(card)
-    card.name.given + " " + card.name.family
+    card.name.fullname ? " " + card.name.fullname : ""
   end
 
   def get_location(email)
@@ -36,15 +42,11 @@ class Vcard2aliasConverter
   end
 
   def create_nick(card)
-    nick = card.nickname ? card.nickname.downcase : first_and_lastname_joined(card)
+    nick = card.nickname ? card.nickname.downcase : fullname_appended(card)
   end
 
-  def first_and_lastname_joined(card)
-      nick = ""
-      nick << card.name.given
-      nick << "_"
-      nick << card.name.family
-      nick.downcase
+  def fullname_appended(card)
+    card.name.fullname.gsub(/\s/,'_').downcase
   end
-    
+
 end
